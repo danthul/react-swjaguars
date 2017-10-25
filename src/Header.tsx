@@ -19,7 +19,7 @@ const HeaderLogo = styled.img`
 const HeaderWell = styled.div`
   background-color: #faf9f9;
   border-radius: 8px;
-  margin: 0px;
+  margin: 15px 0;
   padding: 14px;
 `;
 
