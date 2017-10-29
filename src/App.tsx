@@ -1,26 +1,38 @@
 import * as React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import styled from "styled-components";
+
 import "typeface-droid-sans";
-import Landing from "./Landing";
+import Routes from "./Routes";
+import Header from "./Header";
+import Navbar from "./Navbar";
 import "./App.css";
 
-const FourOhFour = () => <h1>404</h1>;
+const MastHead = styled.header`
+  min-height: 250px;
+  color: #222222;
+  margin-top: 50px;
+  .well {
+    margin-top: 3%;
+    background-color: #ffffff;
+  }
+`;
 
-type Props = {
-  /* */
-};
-
-class App extends React.Component<Props> {
+class App extends React.Component {
   render() {
     return (
-      <Router>
-        <div className="app">
-          <Switch>
-            <Route exact path="/" component={Landing} />
-            <Route component={FourOhFour} />
-          </Switch>
-        </div>
-      </Router>
+      <div>
+        <Navbar />
+        <MastHead id="masthead">
+          <div className="container">
+            <div className="row">
+              <div className="col-xs-12">
+                <Header />
+              </div>
+            </div>
+          </div>
+        </MastHead>
+        <Routes />
+      </div>
     );
   }
 }
