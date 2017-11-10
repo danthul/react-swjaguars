@@ -1,7 +1,7 @@
 import * as React from "react";
-
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Panel from "./Panel";
+import LastMessage from "./LastMessage";
 
 const Home = () => (
   <div className="container">
@@ -22,13 +22,12 @@ const Home = () => (
               Plainfield/Oswego Illinois area. The club was formed to develop
               the sport of lacrosse at the high school level and managed by an
               independent board of parents and coaches who volunteer their time.
-              {/* <Link to={} /> */}
+              <br />
+              <Link to={"/about"}>Our mission</Link>
             </div>
           </div>
         </Panel>
-        <Panel>
-          <div>Athletico</div>
-        </Panel>
+        <LastMessage />
       </main>
     </div>
   </div>
