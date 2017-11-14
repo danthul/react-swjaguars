@@ -1,6 +1,6 @@
 import * as React from "react";
 import Panel from "./Panel";
-import { auth, database } from "./firebase";
+import { auth, database } from "./firebaseDB";
 
 type Props = {
   /* */
@@ -51,7 +51,10 @@ class MessageList extends React.Component<Props, State> {
               ? Object.keys(messages).map((keyName, keyIndex) => {
                   return (
                     <div key={keyIndex}>
-                      <Panel heading={messages[keyName].name}>
+                      <Panel
+                        hdate={messages[keyName].updated}
+                        heading={messages[keyName].name}
+                      >
                         {messages[keyName].body}
                       </Panel>
                     </div>

@@ -1,6 +1,6 @@
 import * as React from "react";
 import Panel from "./Panel";
-import { auth, database } from "./firebase";
+import { auth, database } from "./firebaseDB";
 import SignIn from "./SignIn";
 
 type Props = {
@@ -82,13 +82,14 @@ class MessageList extends React.Component<Props, State> {
       messageupdated,
       currentUser
     } = this.state;
+    const headingMessage = "Messages";
     return (
       <div className="container">
         <div className="row">
           <main className="col-md-12">
             {!currentUser && <SignIn />}
             {currentUser && (
-              <Panel heading={`Messages`}>
+              <Panel heading={headingMessage}>
                 <form className="form-horizontal" onSubmit={this.handleSubmit}>
                   <div className="form-group">
                     <label

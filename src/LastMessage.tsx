@@ -1,6 +1,6 @@
 import * as React from "react";
 import Panel from "./Panel";
-import { auth, database } from "./firebase";
+import { auth, database } from "./firebaseDB";
 
 type Props = {
   /* */
@@ -51,9 +51,10 @@ class LastMessage extends React.Component<Props, State> {
     const { message } = this.state;
     return (
       <div>
-        Why
         {message ? (
-          <Panel heading={message.name}>{message.body}</Panel>
+          <Panel hdate={message.updated} heading={message.name}>
+            {message.body}
+          </Panel>
         ) : (
           <Panel heading={"No messages"}>No messages found</Panel>
         )}
