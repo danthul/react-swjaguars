@@ -24,9 +24,8 @@ const HeaderBar = styled.div`
 
 const header = (heading?: string, hdate?: string) => {
   if (heading) {
-    console.log("hdate", hdate);
     return (
-      <HeaderBar>
+      <HeaderBar className="panel_header">
         <div>{heading}</div>
         <div>{hdate ? format(new Date(hdate), "MMM D, YYYY h:mm a") : ""}</div>
       </HeaderBar>
