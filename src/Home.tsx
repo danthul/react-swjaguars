@@ -2,6 +2,7 @@ import * as React from "react";
 import { Link } from "react-router-dom";
 import Panel from "./Panel";
 import LastMessage from "./LastMessage";
+import TwitterFeed from "./TwitterFeed";
 
 const Home = () => (
   <div className="container">
@@ -29,6 +30,9 @@ const Home = () => (
         </Panel>
         <LastMessage />
       </main>
+      <aside className="col-md-4">
+        <TwitterFeed />
+      </aside>
     </div>
   </div>
 );
