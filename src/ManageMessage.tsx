@@ -1,7 +1,5 @@
 import * as React from "react";
 import Panel from "./Panel";
-import { auth, database } from "./firebaseDB";
-import SignIn from "./SignIn";
 
 type Props = {
   /* */
@@ -25,7 +23,6 @@ class MessageList extends React.Component<Props, State> {
   messageRef: any;
   constructor(props: any) {
     super(props);
-    this.messageRef = database.ref("messages");
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.state = {
@@ -38,16 +35,16 @@ class MessageList extends React.Component<Props, State> {
   }
 
   componentDidMount() {
-    auth.onAuthStateChanged(currentUser => {
-      this.setState({ currentUser });
-      if (this.messageRef) {
-        this.messageRef.on("value", (snapshot: any) => {
-          this.setState({
-            messages: snapshot.val()
-          });
-        });
-      }
-    });
+    // auth.onAuthStateChanged(currentUser => {
+    //   this.setState({ currentUser });
+    //   if (this.messageRef) {
+    //     this.messageRef.on("value", (snapshot: any) => {
+    //       this.setState({
+    //         messages: snapshot.val()
+    //       });
+    //     });
+    //   }
+    // });
   }
 
   handleSubmit(event: any) {
@@ -87,7 +84,7 @@ class MessageList extends React.Component<Props, State> {
       <div className="container">
         <div className="row">
           <main className="col-md-12">
-            {!currentUser && <SignIn />}
+            {/* {!currentUser && <SignIn />} */}
             {currentUser && (
               <Panel heading={headingMessage}>
                 <form className="form-horizontal" onSubmit={this.handleSubmit}>

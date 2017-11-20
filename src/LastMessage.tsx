@@ -1,6 +1,6 @@
 import * as React from "react";
 import Panel from "./Panel";
-import { auth, database } from "./firebaseDB";
+import { getArticlesApi } from "./apiHelpers";
 
 type Props = {
   /* */
@@ -13,38 +13,41 @@ type State = {
     updated: string;
   };
   currentUser: any;
+  error: boolean;
+  errorText: string;
 };
 
 class LastMessage extends React.Component<Props, State> {
   messageRef: any;
   constructor(props: any) {
     super(props);
-    this.messageRef = database
-      .ref("messages")
-      .orderByChild("updated")
-      .limitToLast(1);
     this.state = {
       message: {
         body: "",
         name: "",
         updated: ""
       },
-      currentUser: ""
+      currentUser: "",
+      error: false,
+      errorText: ""
     };
   }
 
-  componentDidMount() {
-    auth.onAuthStateChanged(currentUser => {
-      this.setState({ currentUser });
-      if (this.messageRef) {
-        this.messageRef.on("value", (snapshot: any) => {
-          const messageKey = Object.keys(snapshot.val())[0];
-          this.setState({
-            message: snapshot.val()[messageKey]
-          });
-        });
-      }
-    });
+  async componentDidMount() {
+    // try {
+    const response = await getArticlesApi();
+    console.log(response);
+
+    if (response && response.data) {
+      this.setState({ message: response.data[0] });
+    }
+    // } catch (error) {
+    //   console.log("Axios error", error);
+    //   this.setState({
+    //     error: true,
+    //     errorText: `Error connecting. Please try again later.`
+    //   });
+    // }
   }
 
   render() {
