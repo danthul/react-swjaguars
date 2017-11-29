@@ -30,3 +30,7 @@ body {
   margin: 0px;
   padding: 14px;
 }
+
+.panel-body {
+  white-space: pre-line;
+}

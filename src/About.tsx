@@ -13,7 +13,6 @@ const About = () => (
               the sport of lacrosse at the high school level and managed by an
               independent board of parents and coaches who volunteer their time.
             </p>
-
             <p>
               All high school aged boys are eligible to play on our club team.
               Our local team is led by former high school and college players to
@@ -26,7 +25,6 @@ const About = () => (
               critical to our program, we encourage you to get kids involved in
               one of the local programs!
             </p>
-
             <p>
               The goal of our club is to develop this program into an IHSA
               sanctioned team. Currently, IHSA does not sanction lacrosse as a
@@ -37,7 +35,6 @@ const About = () => (
               young athletes to learn and apply the principles of teamwork,
               discipline, dedication, and sportsmanship.
             </p>
-
             <p>
               Southwest Lacrosse is a self-funded consolidated team of young men
               from the Plainfield/Oswego area. We are sustained by the efforts
@@ -47,7 +44,6 @@ const About = () => (
               our community by providing a healthy outlet for children and
               opportunities for the community to unite.
             </p>
-
             <p>
               We appreciate the generous support of the community and local
               merchants. Please email
@@ -58,7 +54,6 @@ const About = () => (
               Southwest Lacrosse! We have many volunteer opportunities and any
               scholarships or donations are always appreciated!
             </p>
-
             <blockquote className="blockquote-reverse">
               {" "}
               Sportsmanship - Teamwork - Strength - Character - Discipline -

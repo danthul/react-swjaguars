@@ -7,6 +7,14 @@ export interface PanelProps {
   heading?: string;
   hdate?: string;
   children: string | JSX.Element;
+  admin?: boolean;
+  manageFunctions?: manageMessageFunctions;
+}
+
+interface manageMessageFunctions {
+  editFN: Function;
+  deleteFN: Function;
+  _id: string;
 }
 
 const HeaderBar = styled.div`
@@ -22,7 +30,32 @@ const HeaderBar = styled.div`
   border-top-right-radius: 3px;
 `;
 
-const header = (heading?: string, hdate?: string) => {
+// const ManageMessageButtons = (manageFunctions: manageMessageFunctions) => {
+//   return (
+//     <div>
+//       <button
+//         className="btn btn-warning ng-scope"
+//         onClick={manageFunctions.editFN(22)}
+//       >
+//         <i className="fa fa-pencil fa-lg" /> Edit
+//       </button>
+//       <button
+//         className="btn btn-danger ng-scope"
+//         onClick={manageFunctions.deleteFN(44)}
+//       >
+//         <i className="fa fa-trash-o fa-lg" />
+//         Delete
+//       </button>
+//     </div>
+//   );
+// };
+
+const PanelHeader = (
+  heading?: string,
+  hdate?: string,
+  admin?: boolean,
+  manageFunctions?: manageMessageFunctions
+) => {
   if (heading) {
     return (
       <HeaderBar className="panel_header">
@@ -35,11 +68,51 @@ const header = (heading?: string, hdate?: string) => {
   }
 };
 
-const Panel = (props: PanelProps) => (
-  <div className="panel panel-default">
-    {header(props.heading, props.hdate)}
-    <div className="panel-body">{props.children}</div>
-  </div>
-);
+const Panel = (props: PanelProps) => {
+  const messageID = props.manageFunctions ? props.manageFunctions._id : "";
+  const editFunction = () => {
+    props.manageFunctions ? props.manageFunctions.editFN(messageID) : null;
+  };
+
+  const deleteFunction = () => {
+    props.manageFunctions ? props.manageFunctions.deleteFN(messageID) : null;
+  };
+
+  return (
+    <div className="panel panel-default">
+      {PanelHeader(
+        props.heading,
+        props.hdate,
+        props.admin,
+        props.manageFunctions
+      )}
+      {typeof props.children === "string" ? (
+        <div
+          className="panel-body"
+          dangerouslySetInnerHTML={{ __html: props.children }}
+        />
+      ) : (
+        <div className="panel-body">{props.children}</div>
+      )}
+      {props.admin && editFunction && deleteFunction ? (
+        <div>
+          {editFunction ? (
+            <button className="btn btn-warning" onClick={editFunction}>
+              <i className="fa fa-pencil fa-lg" /> Edit
+            </button>
+          ) : (
+            ""
+          )}
+          <button className="btn btn-danger" onClick={deleteFunction}>
+            <i className="fa fa-trash-o fa-lg" />
+            Delete
+          </button>
+        </div>
+      ) : (
+        ""
+      )}
+    </div>
+  );
+};
 
 export default Panel;

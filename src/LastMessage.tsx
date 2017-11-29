@@ -1,6 +1,6 @@
 import * as React from "react";
 import Panel from "./Panel";
-import { getArticlesApi } from "./apiHelpers";
+import { getLastMessageApi } from "./apiHelpers";
 
 type Props = {
   /* */
@@ -34,20 +34,10 @@ class LastMessage extends React.Component<Props, State> {
   }
 
   async componentDidMount() {
-    // try {
-    const response = await getArticlesApi();
-    console.log(response);
-
+    const response = await getLastMessageApi();
     if (response && response.data) {
       this.setState({ message: response.data[0] });
     }
-    // } catch (error) {
-    //   console.log("Axios error", error);
-    //   this.setState({
-    //     error: true,
-    //     errorText: `Error connecting. Please try again later.`
-    //   });
-    // }
   }
 
   render() {

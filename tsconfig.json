@@ -8,6 +8,7 @@
         "name": "typescript-styled-plugin"
       }
     ],
-    "sourceMap": true
+    "sourceMap": true,
+    "strictNullChecks": true
   }
 }
