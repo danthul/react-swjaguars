@@ -55,6 +55,7 @@
     "@types/enzyme-adapter-react-16": "^1.0.1",
     "@types/jest": "^21.1.6",
     "@types/lodash": "^4.14.85",
+    "@types/moxios": "^0.4.8",
     "@types/node": "^8.0.51",
     "@types/react": "^16.0.22",
     "@types/react-dom": "^16.0.3",
@@ -71,13 +72,9 @@
   },
   "jest": {
     "mapCoverage": true,
-    "collectCoverageFrom": [
-      "src/**/*.{js,jsx,ts,tsx}"
-    ],
+    "collectCoverageFrom": ["src/**/*.{js,jsx,ts,tsx}"],
     "setupTestFrameworkScriptFile": "<rootDir>/src/__tests__/setup.js",
-    "setupFiles": [
-      "<rootDir>/config/polyfills.js"
-    ],
+    "setupFiles": ["<rootDir>/config/polyfills.js"],
     "testMatch": [
       "<rootDir>/src/**/__tests__/**/*.ts?(x)",
       "<rootDir>/src/**/?(*.)(spec|test).ts?(x)"
@@ -114,9 +111,7 @@
     }
   },
   "babel": {
-    "presets": [
-      "react-app"
-    ]
+    "presets": ["react-app"]
   },
   "eslintConfig": {
     "extends": "react-app"

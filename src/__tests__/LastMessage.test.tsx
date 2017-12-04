@@ -1,5 +1,4 @@
 import * as React from "react";
-import * as ReactDOM from "react-dom";
 
 import { render, configure, shallow } from "enzyme";
 import LastMessage from "../LastMessage";
