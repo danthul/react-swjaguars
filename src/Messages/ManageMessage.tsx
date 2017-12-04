@@ -1,7 +1,7 @@
 import * as React from "react";
 import { format } from "date-fns";
-import Panel from "./Panel";
-import { getMessageApi, newMessageApi, updateMessageApi } from "./apiHelpers";
+import Panel from "../Panel";
+import { getMessageApi, newMessageApi, updateMessageApi } from "../apiHelpers";
 
 type Props = {
   _id: string;

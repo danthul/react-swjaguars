@@ -12,8 +12,8 @@ export interface PanelProps {
 }
 
 interface manageMessageFunctions {
-  editFN: Function;
-  deleteFN: Function;
+  editFN: (string) => void;
+  deleteFN: (string) => void;
   _id: string;
 }
 

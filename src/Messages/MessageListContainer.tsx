@@ -1,8 +1,8 @@
 import * as React from "react";
 import { format } from "date-fns";
-import Panel from "./Panel";
-import { getMessagesApi, deleteMessageApi } from "./apiHelpers";
-import ManageMessage from "./ManageMessage";
+import Panel from "../Panel";
+import { getMessagesApi, deleteMessageApi } from "../apiHelpers";
+import MessageList from "./MessageList";
 
 type Props = {
   /* */
@@ -22,7 +22,7 @@ type State = {
   editing: string;
 };
 
-class MessageList extends React.Component<Props, State> {
+class MessageListContainer extends React.Component<Props, State> {
   constructor(props: any) {
     super(props);
     this.state = {
@@ -36,6 +36,10 @@ class MessageList extends React.Component<Props, State> {
       editing: ""
     };
   }
+
+  newFN = () => {
+    this.setState({ editing: "0" });
+  };
 
   editFN = (id: string) => {
     this.setState({ editing: id });
@@ -53,14 +57,23 @@ class MessageList extends React.Component<Props, State> {
 
   deleteFN = (id: string) => {
     if (confirm("Are you sure you wish to delete this message?")) {
-      deleteMessageApi(id);
+      deleteMessageApi(id)
+        .then(() => {
+          if (this.state.messages) {
+            const otherMessages = this.state.messages.filter(message => {
+              return message._id !== id;
+            });
+            if (otherMessages) {
+              this.setState({ messages: otherMessages });
+            }
+          }
+        })
+        .catch(response => {
+          console.error(response);
+          alert("Something went wrong");
+        });
     }
-    console.log(`deleting ${id}`);
     return true;
-  };
-
-  newFN = () => {
-    this.setState({ editing: "0" });
   };
 
   editComplete = (editedMessage: messageItem) => {
@@ -95,55 +108,18 @@ class MessageList extends React.Component<Props, State> {
   }
 
   render() {
-    const { messages } = this.state;
     return (
-      <div className="container">
-        <div className="row">
-          <main className="col-md-12">
-            {this.state.editing ? (
-              <ManageMessage
-                _id={this.state.editing}
-                editMessage={this.state.editMessage}
-                editComplete={this.editComplete}
-              />
-            ) : (
-              <div />
-            )}
-            {!this.state.editing ? (
-              <Panel>
-                <button className="btn btn-primary" onClick={this.newFN}>
-                  Click here to create a new message
-                </button>
-              </Panel>
-            ) : (
-              <div />
-            )}
-
-            {messages
-              ? messages.map(message => {
-                  return (
-                    <div key={message._id}>
-                      <Panel
-                        hdate={message.updated}
-                        heading={message.name}
-                        admin={true}
-                        manageFunctions={{
-                          _id: message._id,
-                          editFN: this.editFN,
-                          deleteFN: this.deleteFN
-                        }}
-                      >
-                        {message.body}
-                      </Panel>
-                    </div>
-                  );
-                })
-              : ""}
-          </main>
-        </div>
-      </div>
+      <MessageList
+        editing={this.state.editing}
+        editMessage={this.state.editMessage}
+        editComplete={this.editComplete}
+        newFN={this.newFN}
+        editFN={this.editFN}
+        deleteFN={this.deleteFN}
+        messages={this.state.messages}
+      />
     );
   }
 }
 
-export default MessageList;
+export default MessageListContainer;
