@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Last Message should render correctly 1`] = `
+<div>
+  <Panel
+    hdate=""
+    heading=""
+  />
+</div>
+`;
