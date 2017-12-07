@@ -99,11 +99,13 @@ class MessageListContainer extends React.Component<Props, State> {
   };
 
   async componentDidMount() {
-    // try {
-    const response = await getMessagesApi();
-
-    if (response && response.data) {
-      this.setState({ messages: response.data });
+    try {
+      const response = await getMessagesApi();
+      if (response && response.data) {
+        this.setState({ messages: response.data });
+      }
+    } catch (e) {
+      console.error(e); // 💩
     }
   }
 

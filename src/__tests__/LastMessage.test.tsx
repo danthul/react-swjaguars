@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { render, configure, shallow } from "enzyme";
+import { render, configure, shallow, mount } from "enzyme";
 import LastMessage from "../LastMessage";
 import toJson from "enzyme-to-json";
 
@@ -10,9 +10,7 @@ import * as Adapter from "enzyme-adapter-react-16";
 configure({ adapter: new Adapter() });
 
 describe("Last Message", () => {
-  const panel = shallow(<LastMessage />, {
-    disableLifecycleMethods: true
-  });
+  const panel = mount(<LastMessage />);
 
   // All tests will go here
   it("always renders a div", () => {

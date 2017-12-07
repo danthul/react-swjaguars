@@ -41,8 +41,14 @@ describe("MessageListContainer", () => {
         response: messages
       });
 
+      const item = mount(<MessageListContainer />);
+
       moxios.wait(function() {
         console.log("hmmm");
+        expect(item.find("div").length).toBeGreaterThan(0);
+        //const bodyDiv = item.find(".panel-body");
+        //expect(bodyDiv.length).toEqual(1);
+        // console.log("bodydiv", bodyDiv.html);
         done();
       });
 

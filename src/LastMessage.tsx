@@ -34,9 +34,13 @@ class LastMessage extends React.Component<Props, State> {
   }
 
   async componentDidMount() {
-    const response = await getLastMessageApi();
-    if (response && response.data) {
-      this.setState({ message: response.data[0] });
+    try {
+      const response = await getLastMessageApi();
+      if (response && response.data) {
+        this.setState({ message: response.data[0] });
+      }
+    } catch (e) {
+      console.error(e); // 💩
     }
   }
 
