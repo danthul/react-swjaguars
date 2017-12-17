@@ -37,6 +37,8 @@ class LastMessage extends React.Component<Props, State> {
     try {
       const response = await getLastMessageApi();
       if (response && response.data) {
+        console.log("response");
+        console.log(response.data);
         this.setState({ message: response.data[0] });
       }
     } catch (e) {

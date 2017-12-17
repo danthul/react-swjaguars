@@ -2,7 +2,7 @@ import * as React from "react";
 import Panel from "../Panel";
 import ManageMessage from "./ManageMessage";
 
-type Props = {
+type MessageListProps = {
   editing: string;
   editMessage: message;
   editComplete: Function;
@@ -19,7 +19,7 @@ type message = {
   _id: string;
 };
 
-const MessageList = ({
+const MessageList: React.SFC<MessageListProps> = ({
   editing,
   editMessage,
   editComplete,
@@ -27,7 +27,7 @@ const MessageList = ({
   editFN,
   deleteFN,
   messages
-}: Props) => (
+}: MessageListProps) => (
   <div className="container">
     <div className="row">
       <main className="col-md-12">
@@ -52,6 +52,7 @@ const MessageList = ({
 
         {messages
           ? messages.map(message => {
+              console.log(message);
               return (
                 <div key={message._id}>
                   <Panel

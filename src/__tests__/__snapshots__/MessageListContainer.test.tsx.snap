@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MessageListContainer gets successful response from API 1`] = `
+<MessageListContainer>
+  <MessageList
+    deleteFN={[Function]}
+    editComplete={[Function]}
+    editFN={[Function]}
+    editMessage={
+      Object {
+        "_id": "0",
+        "body": "",
+        "name": "",
+        "updated": "2017-12-11T10:09:23.794-06:00",
+      }
+    }
+    editing=""
+    newFN={[Function]}
+  >
+    <div
+      className="container"
+    >
+      <div
+        className="row"
+      >
+        <main
+          className="col-md-12"
+        >
+          <div />
+          <Panel>
+            <div
+              className="panel panel-default"
+            >
+              <div
+                className="panel-body"
+              >
+                <button
+                  className="btn btn-primary"
+                  onClick={[Function]}
+                >
+                  Click here to create a new message
+                </button>
+              </div>
+            </div>
+          </Panel>
+        </main>
+      </div>
+    </div>
+  </MessageList>
+</MessageListContainer>
+`;

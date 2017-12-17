@@ -1,12 +1,23 @@
 import * as React from "react";
 // import * as ReactDOM from "react-dom";
-import * as moxios from "moxios";
-import { spy } from "sinon";
+import * as axios from "axios";
+import * as MockAdapter from "axios-mock-adapter";
+// import { spy } from "sinon";
 import { configure, mount } from "enzyme";
+import toJson from "enzyme-to-json";
 import MessageListContainer from "../Messages/MessageListContainer";
 // setup file
 import * as Adapter from "enzyme-adapter-react-16";
 configure({ adapter: new Adapter() });
+
+// This sets the mock adapter on the default instance
+let mock = new MockAdapter(axios);
+let instance;
+
+beforeEach(function() {
+  instance = axios;
+  mock = new MockAdapter(instance);
+});
 
 const messages = [
   {
@@ -25,34 +36,19 @@ const messages = [
   }
 ];
 
+mock.onGet("/articles").reply(200, messages);
+
+mock.onGet("/articles/last").reply(200, messages[0]);
+
 describe("MessageListContainer", () => {
-  describe("#displayAllMessages", () => {
-    beforeEach(() => {
-      moxios.install();
-    });
-
-    afterEach(() => {
-      moxios.uninstall();
-    });
-
-    it("gets successful response from API", done => {
-      moxios.stubRequest("/messages", {
-        status: 200,
-        response: messages
-      });
-
-      const item = mount(<MessageListContainer />);
-
-      moxios.wait(function() {
-        console.log("hmmm");
-        expect(item.find("div").length).toBeGreaterThan(0);
-        //const bodyDiv = item.find(".panel-body");
-        //expect(bodyDiv.length).toEqual(1);
-        // console.log("bodydiv", bodyDiv.html);
-        done();
-      });
-
-      // const panel = mount(<MessageListContainer />);
+  it("gets successful response from API", async () => {
+    const item = mount(<MessageListContainer />);
+    return instance.get("/articles").then(response => {
+      expect(toJson(item.update())).toMatchSnapshot();
+      const divCount = item.find("div").length;
+      expect(item.find("div").length).toBeGreaterThan(0);
+      const bodyDiv = item.find(".panel-body");
+      expect(document.querySelectorAll(".panel-body").length).toEqual(3);
     });
   });
 });

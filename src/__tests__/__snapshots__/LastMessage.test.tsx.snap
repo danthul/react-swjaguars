@@ -1,10 +1,25 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Last Message should render correctly 1`] = `
-<div>
-  <Panel
-    hdate=""
-    heading=""
-  />
-</div>
+<LastMessage>
+  <div>
+    <Panel
+      hdate=""
+      heading=""
+    >
+      <div
+        className="panel panel-default"
+      >
+        <div
+          className="panel-body"
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": "",
+            }
+          }
+        />
+      </div>
+    </Panel>
+  </div>
+</LastMessage>
 `;
