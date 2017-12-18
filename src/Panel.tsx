@@ -1,6 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
-import { format } from "date-fns";
+import * as moment from "moment";
 // import { Link } from "react-router-dom";
 
 export interface PanelProps {
@@ -60,7 +60,9 @@ const PanelHeader = (
     return (
       <HeaderBar className="panel_header">
         <div>{heading}</div>
-        <div>{hdate ? format(new Date(hdate), "MMM D, YYYY h:mm a") : ""}</div>
+        <div>
+          {hdate ? moment(new Date(hdate)).format("MMM D, YYYY h:mm a") : ""}
+        </div>
       </HeaderBar>
     );
   } else {

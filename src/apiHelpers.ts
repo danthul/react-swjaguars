@@ -4,6 +4,10 @@ import axios from "axios";
 const apiUrl = "http://localhost:4010/api";
 // const apiUrl = "https://swjaguars-api.herokuapp.com/api";
 
+const googleURL = process.env.REACT_APP_GCALURL;
+const googleCalendarApiKey = process.env.REACT_APP_GCALKEY;
+console.log(process.env.REACT_APP_GCALURL);
+
 axios.defaults.baseURL = apiUrl;
 
 export function getMessagesApi() {
@@ -20,6 +24,12 @@ export function newMessageApi(message) {
 
 export function getMessageApi(id) {
   return axios.get(`${apiUrl}/articles/${id}`);
+}
+
+export function getCalendarEvents() {
+  return axios.get(
+    `https://content.googleapis.com/calendar/v3/calendars/${googleURL}@group.calendar.google.com/events?orderBy=startTime&singleEvents=true&fields=items&key=${googleCalendarApiKey}`
+  );
 }
 
 export function updateMessageApi(message) {

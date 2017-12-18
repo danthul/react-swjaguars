@@ -1,5 +1,5 @@
 import * as React from "react";
-import { format } from "date-fns";
+import * as moment from "moment";
 import Panel from "../Panel";
 import { getMessageApi, newMessageApi, updateMessageApi } from "../apiHelpers";
 
@@ -30,8 +30,8 @@ class ManageMessage extends React.Component<Props, State> {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     const messagedate = this.props.editMessage.updated
-      ? format(this.props.editMessage.updated, "MM/DD/YYYY hh:mm A")
-      : format(new Date(), "MM/DD/YYYY hh:mm A");
+      ? moment(this.props.editMessage.updated).format("MM/DD/YYYY hh:mm A")
+      : moment(new Date()).format("MM/DD/YYYY hh:mm A");
     this.state = {
       messagebody: this.props.editMessage.body,
       messagename: this.props.editMessage.name,

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { format } from "date-fns";
+import * as moment from "moment";
 import Panel from "../Panel";
 import { getMessagesApi, deleteMessageApi } from "../apiHelpers";
 import MessageList from "./MessageList";
@@ -30,7 +30,7 @@ class MessageListContainer extends React.Component<Props, State> {
         _id: "0",
         body: "",
         name: "",
-        updated: format(new Date())
+        updated: moment(new Date()).format("lll")
       },
       currentUser: "",
       editing: ""
