@@ -3,6 +3,7 @@ import BigCalendar from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import * as moment from "moment";
 import styled from "styled-components";
+import Panel from "./Panel";
 
 BigCalendar.setLocalizer(BigCalendar.momentLocalizer(moment));
 
@@ -55,27 +56,35 @@ const formats = {
 };
 
 const Calendar: React.SFC<CalendarProps> = ({ events }: CalendarProps) => (
-  <CalendarWrapper>
-    <CalendarDiv>
-      {events ? (
-        <BigCalendar
-          events={events}
-          step={30}
-          defaultDate={new Date(Date.now())}
-          defaultView="month"
-          components={{
-            event: DefaultEvent,
-            month: {
-              event: MonthEvent
-            }
-          }}
-          formats={formats}
-        />
-      ) : (
-        <div />
-      )}
-    </CalendarDiv>
-  </CalendarWrapper>
+  <div className="container">
+    <div className="row">
+      <main className="col-md-12">
+        <Panel heading="Southwest Lacrosse Calendar of Events">
+          <CalendarWrapper>
+            <CalendarDiv>
+              {events ? (
+                <BigCalendar
+                  events={events}
+                  step={30}
+                  defaultDate={new Date(Date.now())}
+                  defaultView="month"
+                  components={{
+                    event: DefaultEvent,
+                    month: {
+                      event: MonthEvent
+                    }
+                  }}
+                  formats={formats}
+                />
+              ) : (
+                <div />
+              )}
+            </CalendarDiv>
+          </CalendarWrapper>
+        </Panel>
+      </main>
+    </div>
+  </div>
 );
 
 export default Calendar;
