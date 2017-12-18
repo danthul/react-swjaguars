@@ -31,12 +31,12 @@ type CalendarEvent = {
   end: Date;
 };
 
-const MonthEvent = event => {
-  const startTime = moment(event.start).format("hA");
+const MonthEvent = item => {
+  console.log(item);
   return (
     <span>
-      {startTime}
-      <strong>{event.title}</strong>
+      {moment(item.event.start).format("hA") + " "}
+      <strong>{item.title}</strong>
     </span>
   );
 };
