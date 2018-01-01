@@ -76,7 +76,7 @@ class Navbar extends React.Component<Props, State> {
                 <Link to={"/messages"}>Messages</Link>
               </li>
               <li>
-                <Link to={"/slideshow"}>Pictures</Link>
+                <Link to={"/gallery"}>Pictures</Link>
               </li>
               <li>
                 <Link to={"/about"}>Our Mission</Link>

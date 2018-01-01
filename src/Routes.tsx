@@ -4,6 +4,7 @@ import Home from "./Home";
 import About from "./About";
 import MessageListContainer from "./Messages/MessageListContainer";
 import CalendarContainer from "./CalendarContainer";
+import GalleryContainer from "./Gallery/GalleryContainer";
 
 const Routes = () => {
   return (
@@ -12,6 +13,7 @@ const Routes = () => {
       <Route path="/about" component={About} />
       <Route path="/messages" component={MessageListContainer} />
       <Route path="/calendar" component={CalendarContainer} />
+      <Route path="/gallery" component={GalleryContainer} />
     </Switch>
   );
 };

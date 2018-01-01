@@ -43,3 +43,9 @@ export function updateMessageApi(message) {
 export function deleteMessageApi(id) {
   return axios.delete(`${apiUrl}/articles/${id}`);
 }
+
+export function getPictures() {
+  return axios.get(
+    "https://api.flickr.com/services/rest/?method=flickr.groups.pools.getPhotos&api_key=de46dbf17065c15da8c2a8308bc91a49&group_id=2999138%40N21&extras=date_taken&format=json&nojsoncallback=1&per_page=500"
+  );
+}

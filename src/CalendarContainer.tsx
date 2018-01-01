@@ -1,6 +1,6 @@
 import * as React from "react";
-import { getCalendarEvents } from "./apiHelpers";
 import * as moment from "moment";
+import { getCalendarEvents } from "./apiHelpers";
 import Calendar from "./Calendar";
 
 type Props = {

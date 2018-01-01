@@ -33,7 +33,6 @@ type CalendarEvent = {
 };
 
 const MonthEvent = item => {
-  console.log(item);
   return (
     <span>
       {moment(item.event.start).format("hA") + " "}
@@ -55,6 +54,9 @@ const formats = {
     localizer.format(date, "M/D", culture)
 };
 
+const defaultDate = new Date(Date.now());
+const minTime = new Date(1970, 1, 1, 6);
+
 const Calendar: React.SFC<CalendarProps> = ({ events }: CalendarProps) => (
   <div className="container">
     <div className="row">
@@ -66,7 +68,7 @@ const Calendar: React.SFC<CalendarProps> = ({ events }: CalendarProps) => (
                 <BigCalendar
                   events={events}
                   step={30}
-                  defaultDate={new Date(Date.now())}
+                  defaultDate={defaultDate}
                   defaultView="month"
                   components={{
                     event: DefaultEvent,
