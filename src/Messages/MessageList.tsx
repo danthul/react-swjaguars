@@ -52,7 +52,6 @@ const MessageList: React.SFC<MessageListProps> = ({
 
         {messages
           ? messages.map(message => {
-              console.log(message);
               return (
                 <div key={message._id}>
                   <Panel

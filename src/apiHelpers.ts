@@ -44,8 +44,8 @@ export function deleteMessageApi(id) {
   return axios.delete(`${apiUrl}/articles/${id}`);
 }
 
-export function getPictures() {
+export function getFilteredPicturesApi(page, mindate = "2016-01-01") {
   return axios.get(
-    "https://api.flickr.com/services/rest/?method=flickr.groups.pools.getPhotos&api_key=de46dbf17065c15da8c2a8308bc91a49&group_id=2999138%40N21&extras=date_taken&format=json&nojsoncallback=1&per_page=500"
+    `https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=de46dbf17065c15da8c2a8308bc91a49&group_id=2999138%40N21&extras=date_taken&format=json&nojsoncallback=1&min_upload_date=${mindate}&sort=date-taken-desc&per_page=50&page=${page}`
   );
 }

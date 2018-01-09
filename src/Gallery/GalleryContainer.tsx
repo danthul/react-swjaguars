@@ -1,6 +1,6 @@
 import * as React from "react";
 import Gallery from "./Gallery";
-import { getPictures } from "../apiHelpers";
+import { getFilteredPicturesApi } from "../apiHelpers";
 import {
   createPhotoLinks,
   FlickrImageType,
@@ -13,37 +13,70 @@ type Props = {
 
 type State = {
   images: FlickrImageLink[];
+  pagesLoaded: number;
+  totalPages: number;
+  imagesLoading: boolean;
 };
-
-// const imgId = [1011, 883, 1074, 823, 64, 65, 839, 314, 256, 316, 92, 643];
-// for (let i = 0; i < imgId.length; i++) {
-//   const ih = 200 + Math.floor(Math.random() * 10) * 15;
-//   const thisImage = {
-//     id: String(i + 1),
-//     source: "https://unsplash.it/250/" + ih + "?image=" + imgId[i]
-//   };
-//   imageArr.push(thisImage);
-// }
 
 class GalleryContainer extends React.Component<Props, State> {
   constructor(props: any) {
     super(props);
     this.state = {
-      images: []
+      images: [],
+      pagesLoaded: 1,
+      totalPages: 1,
+      imagesLoading: false
     };
+    this.handleScroll = this.handleScroll.bind(this);
   }
 
   async componentDidMount() {
+    const response = await this.getImages();
+  }
+
+  async getImages() {
     try {
-      const response = await getPictures();
+      this.setState({ imagesLoading: true });
+      const response = await getFilteredPicturesApi(this.state.pagesLoaded);
       if (response && response.data) {
         const photos = response.data.photos.photo;
         const photoLinks = createPhotoLinks(photos);
-
-        this.setState({ images: photoLinks });
+        const concatImages = this.state.images;
+        concatImages.push(...photoLinks);
+        this.setState({
+          images: concatImages,
+          totalPages: response.data.photos.pages,
+          imagesLoading: false
+        });
       }
+      window.addEventListener("scroll", this.handleScroll);
     } catch (e) {
       console.error(e); // 💩
+    }
+  }
+
+  handleScroll(event) {
+    const windowHeight =
+      "innerHeight" in window
+        ? window.innerHeight
+        : document.documentElement.offsetHeight;
+    const body = document.body;
+    const html = document.documentElement;
+    const docHeight = Math.max(
+      body.scrollHeight,
+      body.offsetHeight,
+      html.clientHeight,
+      html.scrollHeight,
+      html.offsetHeight
+    );
+    const windowBottom = windowHeight + window.pageYOffset;
+    if (
+      windowBottom >= docHeight * 0.9 &&
+      this.state.pagesLoaded < this.state.totalPages &&
+      this.state.imagesLoading === false
+    ) {
+      this.setState({ pagesLoaded: this.state.pagesLoaded + 1 });
+      this.getImages();
     }
   }
 
